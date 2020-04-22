@@ -379,7 +379,11 @@ void draw() {
 		break;
 
 		case GAME_OVER: // Gameover Screen
+    if(floor>20){
+      cameraOffsetY += ONE_BLOCK*20;
+    }else{
     cameraOffsetY += ONE_BLOCK*floor;
+    }
     floor = 0;
     if(gameState == GAME_OVER){
     popMatrix();
