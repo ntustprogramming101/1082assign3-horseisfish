@@ -100,7 +100,7 @@ void draw() {
     }
     /* ------ End of Debug Function ------ */
 
-    if(moveMode){
+    if(moveMode||gameState == GAME_OVER){
       pushMatrix();
       translate(0, cameraOffsetY);
     
@@ -379,6 +379,11 @@ void draw() {
 		break;
 
 		case GAME_OVER: // Gameover Screen
+    cameraOffsetY += ONE_BLOCK*floor;
+    floor = 0;
+    if(gameState == GAME_OVER){
+    popMatrix();
+  }
 		image(gameover, 0, 0);
 		
 		if(START_BUTTON_X + START_BUTTON_W > mouseX
