@@ -435,7 +435,7 @@ void keyPressed(){
         groundhogLestY = GroundhogY;
         lastTime = newTime;
         floor++;
-        println(floor);
+        //println(floor);
      //make camera don't move after 20 floor
         if(floor<=20){
           moveMode = true;
