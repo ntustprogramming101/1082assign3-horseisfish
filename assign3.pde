@@ -43,6 +43,8 @@ PImage soldier , robot , cabbage;
 // For debug function; DO NOT edit or remove this!
 int playerHealth = 2;
 float cameraOffsetY = 0;
+float cameraOffsetLestY = 0;
+float cameraOffsetDebugY = 0;
 boolean debugMode = false;
 boolean moveMode = false;
 
@@ -96,11 +98,11 @@ void draw() {
     */
     if (debugMode) {
       pushMatrix();
-      translate(0, cameraOffsetY);
+      translate(0, cameraOffsetDebugY);
     }
     /* ------ End of Debug Function ------ */
 
-    if(moveMode||gameState == GAME_OVER){
+    if(gameState == GAME_OVER){
       pushMatrix();
       translate(0, cameraOffsetY);
     
@@ -139,6 +141,11 @@ void draw() {
 	    fill(253,184,19);
 	    ellipse(590,50,120,120);
 
+    if(moveMode){
+      pushMatrix();
+      translate(0, cameraOffsetY);
+    
+    }
 		// Grass
 		fill(124, 204, 25);
 		noStroke();
@@ -337,9 +344,15 @@ void draw() {
       actionFrame++;
       if (actionFrame > 0 && actionFrame < 15) {
         GroundhogY += ONE_BLOCK / 15.0;
+        if(floor<=20){        
+          cameraOffsetY -= ONE_BLOCK / 15.0;
+        }
         image(groundhogDown, GroundhogX, GroundhogY, GROUNDHOG_H, GROUNDHOG_H);
       } else {
         GroundhogY = groundhogLestY + ONE_BLOCK;
+        if(floor<=20){        
+          cameraOffsetY = cameraOffsetLestY - ONE_BLOCK;
+        }
         downPressed = false;
       }
     }
@@ -442,13 +455,14 @@ void keyPressed(){
         downPressed = true;
         actionFrame = 0;
         groundhogLestY = GroundhogY;
+        cameraOffsetLestY = cameraOffsetY;
         lastTime = newTime;
         floor++;
         //println(floor);
      //make camera don't move after 20 floor
         if(floor<=20){
           moveMode = true;
-          cameraOffsetY -= ONE_BLOCK;
+          //cameraOffsetY -= ONE_BLOCK;
         }
       }
     }
@@ -476,7 +490,7 @@ void keyPressed(){
     switch(key){
       case 'w':
       debugMode = true;
-      cameraOffsetY += 25;
+      cameraOffsetDebugY += 25;
       break;
 
       case 's':
