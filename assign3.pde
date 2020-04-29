@@ -495,7 +495,7 @@ void keyPressed(){
 
       case 's':
       debugMode = true;
-      cameraOffsetY -= 25;
+      cameraOffsetDebugY -= 25;
       break;
 
       case 'a':
